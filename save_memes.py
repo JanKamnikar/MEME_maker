@@ -1,16 +1,6 @@
 
 import json
 
-class Meme:
-    '''en sam meme'''
-    def __init__(self, opis,x,y, ime):
-        self.nastavi(opis,x,y,ime)
-    def nastavi(self,opis,x,y,ime):
-        self.s_tekst = opis
-        self.x_coord = x
-        self.y_coord = y
-        self.image_name = ime
-
 class Memes:
     def __init__(self):
         """memes = {
