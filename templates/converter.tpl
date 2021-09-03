@@ -21,5 +21,7 @@
         <p class="watermark" style="position: absolute; top: 480px; left: 350; font-size: 15px; background-color:white;" >Avtor slike: {{ username }}</p>
 
         <a href="/choose_image">Nazaj na izbiro slike</a>
+
+         <a href="/all_memes">seznam vseh memov</a>
     </body>
 </html>
