@@ -2,7 +2,7 @@
     <head>
     </head>
     <body>
-        <h1>Napaka: Vnesli ste neveljavne koordinate premika</h1>
-        <a href="/converter">Nazaj na urejevalnik slike</a>
+        <h1>Napaka: Vnesli ste neveljavne podatke</h1>
+        <a href="/izberi_sliko">Nazaj na izbiro slike</a>
     </body>
 </html>

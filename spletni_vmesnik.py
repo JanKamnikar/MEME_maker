@@ -103,7 +103,6 @@ def choose_image():
 
 @bottle.post("/choose_image")
 def download_image():
-    global image_name
     url = bottle.request.forms.get("url_slike")
     url = url.split("?")[0]
     prenesi_sliko(url)
@@ -112,5 +111,5 @@ def download_image():
     '''shranis url slike v cookie'''
     bottle.response.set_cookie('image_name', image_name)
     return bottle.redirect("/choose_image")
-
+    
 bottle.run(debug=True, reloader=True)

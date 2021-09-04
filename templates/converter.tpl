@@ -22,6 +22,6 @@
 
         <a href="/choose_image">Nazaj na izbiro slike</a>
 
-         <a href="/all_memes">seznam vseh memov</a>
+        <a href="/all_memes">seznam vseh memov</a>
     </body>
 </html>

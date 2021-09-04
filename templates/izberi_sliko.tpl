@@ -7,7 +7,7 @@
         <img src="slika/{{ image_name }}">
         
         <form class="new-image" method="post">
-            <p>Prenesi svojo sliko </p>
+            <p>Prenesi svojo sliko (samo copy paste url, tipa .jpg)</p>
             <input name="url_slike" type="text" value="" />
             <input type="submit" value="Končano" />
         </form>
