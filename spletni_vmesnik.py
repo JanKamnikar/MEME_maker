@@ -1,3 +1,5 @@
+SKRIVNOST = "krneki"
+  
 from prenasalec_slik import prenesi_sliko
 import bottle
 import save_memes
@@ -7,6 +9,7 @@ privzeto_s_tekst = "Vpiši tekst"
 privzeto_x_coord = 20
 privzeto_y_coord = 30
 privzeto_ime = "neprijavljen_uporabnik"
+privzeto_geslo = "geslo"
 privzeto_image_name = "test.jpg"
 
 memes = Memes()
@@ -22,12 +25,26 @@ def serve_pictures(name):
 @bottle.get("/")
 def naslovna_stran():
     username = bottle.request.get_cookie("Username") or privzeto_ime
-    return bottle.template("templates/naslovna_stran.tpl", username=username)
+    pravilnost = bottle.request.get_cookie("Pravilnost", secret=SKRIVNOST) or False
+    return bottle.template("templates/naslovna_stran.tpl", username=username, pravilnost=pravilnost)
 
 @bottle.post("/")
 def nastavi_ime():
+    memes.load()
     username = bottle.request.forms.get("username") or privzeto_ime
-    bottle.response.set_cookie('Username', username)
+    geslo = bottle.request.forms.get("geslo") or privzeto_geslo
+    
+    if username not in memes.uporabniki:
+        bottle.response.set_cookie('Username', username)
+        memes.uporabniki[username] = geslo
+        memes.save()
+    elif memes.uporabniki[username] == geslo:
+        bottle.response.set_cookie('Username', username)
+        bottle.response.set_cookie("Pravilnost", True, secret=SKRIVNOST)
+    else:
+        bottle.response.set_cookie("Pravilnost", False, secret=SKRIVNOST)
+
+
     return bottle.redirect("/")
 
 @bottle.get("/converter")
@@ -62,7 +79,6 @@ def napaka():
 @bottle.post("/converter")
 def spremeni_tekst():
     global memes
-    #global s_tekst, x_coord, y_coord
     username = bottle.request.get_cookie('Username') or privzeto_ime
     image_name = bottle.request.get_cookie('image_name') or privzeto_image_name
     s_tekst = bottle.request.forms.get("tip_obrazca_tekst")

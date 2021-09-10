@@ -22,7 +22,11 @@ class Memes:
         }
         """
         self.memes = {}
+        self.uporabniki = {}
 
+    def add_user(self, user, geslo):
+        if user not in self.uporabniki:
+            self.uporabniki["user"] = geslo
 
     def add_meme(self, user, ime, opis, x, y):
         if user not in self.memes:
@@ -37,9 +41,16 @@ class Memes:
         with open("memes.json", "w") as f:
             f.write(json.dumps(self.memes))
 
+        with open("uporabniki.json", "w") as dat:
+            dat.write(json.dumps(self.uporabniki))
+
+
     def load(self):
         with open("memes.json", "r") as f:
             self.memes = json.load(f)
+
+        with open("uporabniki.json", "r") as dat:
+            self.uporabniki = json.load(dat)
     
     def get_memes(self, user):
         return self.memes.get(user)
